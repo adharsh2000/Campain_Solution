@@ -30,7 +30,7 @@
 //   const saveFormData = async (data) => {
 //     try {
 //        templateService.createTemplate(data).then(async(response) => {
-       
+
 //         // NotificationManager.success("Added new Template!", "Success!", 2000);
 //         if (response.data.status === 409){
 //           NotificationManager.error(response.data.message, "Error!", 2500)
@@ -41,7 +41,7 @@
 //           resetForm();
 //         }
 //       })
-     
+
 //     } catch (error) {
 //       console.error("Form submission error:", error);
 //       // NotificationManager.error("Error while creating new Template");
@@ -156,7 +156,7 @@
 //               </div>
 //               <div>
 //                 <label className="col-md-4 col-form-label">Content</label>
-                
+
 //                   <ReactQuill
 //                     className="form-control"
 //                     style={{ minHeight: '150px'}} 
@@ -176,7 +176,7 @@
 //                       {contentError}
 //                     </div>
 //                   )}
-                
+
 //                 <br />
 //               </div>
 //             </div>
@@ -186,7 +186,7 @@
 //           isEdit={isEdit}
 //           resetCallback={resetCallback}
 //           submitting={false}
-        
+
 //         />
 //       </form>
 //     </div>
@@ -215,6 +215,7 @@ const TemplateEditor = ({
   const [htmlFile, setHtmlFile] = useState(null);
   const editorRef = useRef();
   const fileInputRef = useRef();
+  const iframeRef = useRef(null);
 
   useEffect(() => {
     if (isEdit && user && user.name) {
@@ -223,10 +224,20 @@ const TemplateEditor = ({
     }
   }, [isEdit, user]);
 
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (iframe) {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      doc.open();
+      doc.write(content);
+      doc.close();
+    }
+  }, [content]);
+
   const saveFormData = async (data) => {
     try {
-      templateService.createTemplate(data).then(async(response) => {
-        if (response.data.status === 409){
+      templateService.createTemplate(data).then(async (response) => {
+        if (response.data.status === 409) {
           NotificationManager.error(response.data.message, "Error!", 2500)
         } else if (response.data.status === 500) {
           NotificationManager.error('Internal server error', "Error!", 2500);
@@ -283,6 +294,7 @@ const TemplateEditor = ({
       const reader = new FileReader();
       reader.onload = (e) => {
         setContent(e.target.result);
+        console.log('content', e.target.result);
       };
       reader.readAsText(file);
     } else {
@@ -301,9 +313,26 @@ const TemplateEditor = ({
     }
   };
 
+  function cleanEscapedHTML(content) {
+    if (!content) return '';
+  
+    return content
+      .replace(/\\n/g, '')       // Remove \n
+      .replace(/\\t/g, '')       // Remove \t
+      .replace(/\\"/g, '"')      // Replace \" with "
+      .replace(/\\\\/g, '\\')    // Replace \\ with \
+      .trim();                   // Trim leading/trailing spaces
+  }
+
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     const data = { name, content };
+    // const data = {
+    //   name,
+    //   content: cleanEscapedHTML(content)
+    // }
+
+    console.log('data', data);
 
     let isFormValid = true;
 
@@ -385,17 +414,30 @@ const TemplateEditor = ({
                       </div>
                     )}
                   </div>
-                  <div className="mb-3 text-center">OR</div>
+                  {/* <div className="mb-3 text-center">OR</div> 
                   <ReactQuill
                     className="form-control"
-                    style={{ minHeight: '150px'}}
+                    style={{ minHeight: '150px' }}
                     theme="snow"
                     modules={{ toolbar: toolbarOptions }}
                     value={content}
                     onChange={handleEditorChange}
                     required
                     ref={editorRef}
+                  /> */}
+
+                  <label className="col-md-4 col-form-label">Live Preview</label>
+                  <iframe
+                    ref={iframeRef}
+                    title="HTML Preview"
+                    style={{
+                      width: '100%',
+                      height: '500px',
+                      border: '1px solid #ccc',
+                      marginTop: '1rem',
+                    }}
                   />
+
                   {contentError && (
                     <div
                       className="text-danger"
