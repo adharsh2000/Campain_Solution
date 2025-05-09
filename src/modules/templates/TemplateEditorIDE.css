@@ -1,0 +1,126 @@
+:root {
+    --bg-color-ide: #1e1e1e;
+    --toolbar-bg-ide: #252526;
+    --border-color-ide: #333;
+    --tab-active-bg-ide: #2d2d2d;
+    --text-color-ide: #d4d4d4;
+}
+
+/* * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg-color-ide);
+    color: var(--text-color-ide);
+    height: 100vh;
+    overflow: hidden;
+}
+ */
+
+.preview-pane {
+    flex: 1;
+    background: white;
+}
+
+.preview-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.preview-pane {
+    flex: 1;
+    background: white;
+    overflow: auto;
+    height: 400px;
+}
+
+.container-ide {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow: scroll;
+    /* max-width: 95%; */
+
+    margin: 20px 10px;
+
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+
+.container-ide::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.container-ide::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.container-ide::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.container-ide::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+
+.editor {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-color-ide);
+    overflow-x: scroll;
+}
+
+.editor-container {
+    width: 50%;
+    height: calc(100vh - 60px);
+}
+
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--toolbar-bg-ide);
+    border-bottom: 1px solid var(--border-color-ide);
+    height: 50px;
+    position: sticky;
+    font-size: x-small;
+}
+
+.preview-pane {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-color-ide);
+    overflow: hidden;
+}
+
+.cm-scroller {
+    min-height: 100vh !important;
+}
+
+
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.buttons button {
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    width: max-content;
+}

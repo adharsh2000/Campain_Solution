@@ -1,0 +1,46 @@
+/** Global styles **/
+
+.form-label, .col-form-label {
+    text-align: left;
+}
+
+.divider.text-start-center .divider-text {
+    left: -42%;
+}
+
+.list-group.list-group-horizontal-md.text-md-center {
+    background-color: #f8f8f8;
+}
+
+.layout-navbar {
+    height: 2.8rem;
+}
+
+.bg-menu-theme {
+    /* background-color: #36454F !important; */
+}
+
+.bg-menu-theme .menu-link, .bg-menu-theme .menu-horizontal-prev, .bg-menu-theme .menu-horizontal-next {
+    /* color: #ffffff; */
+}
+
+.bg-menu-theme .menu-inner > .menu-item.active > .menu-link {
+    /* color: #696cff;
+    background-color: rgba(105, 108, 255, 0.16) !important; */
+    /* color: #696cff;
+    background-color: rgb(255, 255, 255) !important;
+    width: 13.6em; */
+}
+
+.layout-wrapper, .layout-container {
+    background-color: #f8f8f8;
+}
+
+.menu .app-brand.demo {
+    /* margin-top: 1px;
+    background-color: #000; */
+}
+
+.bg-menu-theme .menu-text {
+    /* color: #ffffff; */
+}

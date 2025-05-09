@@ -1,0 +1,211 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.sub-menu {
+  display: block;
+  list-style-type: none;
+}
+
+.no-sub-menu {
+  display: none;
+}
+
+.menu-add-icon {
+  margin-right: 40px !important;
+}
+
+.menu-vertical .menu-inner > .menu-item .menu-link {
+  margin: 0;
+}
+
+.menu-vertical, .menu-vertical .menu-block, .menu-vertical .menu-inner > .menu-item, .menu-vertical .menu-inner > .menu-header {
+  /* width: 13.25rem; -- Menu width*/ 
+}
+
+.Sidebar.collapsed {
+  width: 48px;
+}
+
+.Sidebar.collapsed.menu-vertical .app-brand {
+  padding: 0;
+}
+
+.Sidebar.collapsed.menu-vertical .app-brand .app-brand-text {
+  font-size: 14px;
+}
+
+.Sidebar.collapsed.menu-vertical .app-brand .layout-menu-toggle{
+  left: 2rem;
+  margin-top: 30px;
+}
+
+.menu-vertical .app-brand img{
+  width: 190px !important;
+}
+
+.Sidebar.collapsed.menu-vertical .app-brand img{
+  width: 160px !important;
+}
+
+.app-brand .layout-menu-toggle {
+  margin-top: 30px;
+}
+
+.Sidebar.collapsed.menu-vertical ul{
+  overflow: hidden;
+}
+
+.app-brand .layout-menu-toggle {
+  /* left: 12rem; -- Menu minimise icon position */
+}
+
+.bg-menu-theme .menu-link.active, .bg-menu-theme .menu-horizontal-prev.active, .bg-menu-theme .menu-horizontal-next.active {
+  /* color: #566a7f; */
+  color: #94B04D !important;
+  background-color: rgb(255, 255, 255) !important;
+  width: 13.6em;
+}
+
+.bg-menu-theme {
+  background-color: #233446  !important;
+  color: #ffffff !important;
+}
+
+.menu-text {
+  color: #0F3060 !important;
+}
+
+.bg-menu-theme .menu-link, .bg-menu-theme .menu-horizontal-prev, .bg-menu-theme .menu-horizontal-next {
+  color: #ffffff;
+}
+
+.menu-vertical .app-brand {
+  background-color: white;
+}
+
+
+
+.clickable-row {
+  cursor: pointer;
+  height: 40px;
+}
+
+.clickable-row:hover {
+  background-color: lightgray;
+}
+
+.selected, .selected:hover {
+  background-color: lightgray;
+}
+
+.Sidebar.collapsed .sub-title {
+  color: white;
+}
+
+.Sidebar.collapsed .bx-message-square-add {
+  display: none;
+}
+
+.menu-item.active .menu-link {
+    /* background-color: rgba(105, 108, 255, 0.16) !important; */
+    /* background-color: #d2deb4 !important; */
+    background-color: #ffffff !important;
+}
+
+.inline-spacing > * {
+  margin: 10px 15px 10px !important;
+  text-align: right;
+}
+
+.view-text {
+  margin-top: 5px;
+}
+
+.col-form-label {
+  font-weight: bold;
+}
+
+
+/* primary button */
+.btn-primary {
+  background-color: #0F3060;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active    {
+  background-color: #3276b1;
+  color: #FFF;
+  border-color: #285e8e;
+}
+.btn-outline-primary {
+  color: #3276b1;
+  border-color: #3276b1;
+  background: transparent;
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active    {
+  background-color: #3276b1;
+  color: #FFF;
+  border-color: #285e8e;
+}
+
+.app-brand .layout-menu-toggle {
+  background-color: #91AE47;
+}
+
+.text-primary {
+  color: #91AE47 !important;
+}
+
+.currency-sub-text {
+  font-size: large;
+}
+
+h4.sub-title {
+  margin-left: 50px;
+}
+
+
+/* Override core css*/
+.container-p-y:not([class^=pt-]):not([class*=" pt-"]) {
+  padding-top: 0.625rem !important;
+}
