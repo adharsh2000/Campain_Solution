@@ -195,7 +195,7 @@
 
 // export default TemplateEditor;
 import React, { useEffect, useRef, useState } from "react";
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { NotificationManager } from "react-notifications";
 import ActionButtonGroup from "../../Employee/components/ActionButtonGroup";
@@ -313,16 +313,6 @@ const TemplateEditor = ({
     }
   };
 
-  function cleanEscapedHTML(content) {
-    if (!content) return '';
-  
-    return content
-      .replace(/\\n/g, '')       // Remove \n
-      .replace(/\\t/g, '')       // Remove \t
-      .replace(/\\"/g, '"')      // Replace \" with "
-      .replace(/\\\\/g, '\\')    // Replace \\ with \
-      .trim();                   // Trim leading/trailing spaces
-  }
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();

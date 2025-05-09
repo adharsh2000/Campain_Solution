@@ -951,6 +951,7 @@ const Campaign = ({ user, isEdit, reloadCallback, showUpdateButton }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const fileInputRef = useRef(null);
+  const iframeRef = useRef(null);
 
   const toolbarOptions = [
     ["bold", "italic", "underline", "strike", "blockquote"],
@@ -1014,8 +1015,14 @@ const Campaign = ({ user, isEdit, reloadCallback, showUpdateButton }) => {
   const handleTemplateChange = async (templateId) => {
     try {
       const templateContent = await fetchTemplateById(templateId);
+      console.log("templateContent", templateContent);
       setEditorContent(templateContent);
       setSelectedTemplate(templateContent);
+      setForm((prevState) => ({
+        ...prevState,
+        message: templateContent,
+
+      }))
     } catch (error) {
       console.log(error);
     }
@@ -1062,6 +1069,7 @@ const Campaign = ({ user, isEdit, reloadCallback, showUpdateButton }) => {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try {
+      console.log("DATA:", form);
       if (isEdit && user && user.id) await updateFormData(user.id);
       else await saveFormData(form);
     } catch (error) {
@@ -1120,6 +1128,16 @@ const Campaign = ({ user, isEdit, reloadCallback, showUpdateButton }) => {
   const reloadCallbackFn = () => {
     reloadCallback();
   };
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (iframe) {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      doc.open();
+      doc.write(isEdit ? form.message : editorContent);
+      doc.close();
+    }
+  }, [isEdit, editorContent, form.message]);
 
   return (
     <form onSubmit={onSubmitHandler}>
@@ -1237,6 +1255,7 @@ const Campaign = ({ user, isEdit, reloadCallback, showUpdateButton }) => {
                     onChange={(e) => {
                       if (e.target && e.target.value)
                         handleTemplateChange(e.target.value);
+                        handleChange(e);
                     }}
                   >
                     <option value="">Select a template</option>
@@ -1308,7 +1327,7 @@ const Campaign = ({ user, isEdit, reloadCallback, showUpdateButton }) => {
                     className="form-control"
                   />
                 </div>
-                <ReactQuill
+                {/* <ReactQuill
                   value={isEdit ? form.message : editorContent}
                   id="message"
                   name="message"
@@ -1317,7 +1336,17 @@ const Campaign = ({ user, isEdit, reloadCallback, showUpdateButton }) => {
                   modules={{ toolbar: toolbarOptions }}
                   style={{ color: "black" }}
                   onChange={handleMessageEdit}
-                />
+                /> */}
+                <iframe
+                    ref={iframeRef}
+                    title="HTML Preview"
+                    style={{
+                      width: '100%',
+                      height: '500px',
+                      border: '1px solid #ccc',
+                      marginTop: '1rem',
+                    }}
+                  />
               </div>
             </div>
           </div>
